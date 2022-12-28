@@ -1,0 +1,111 @@
+704. Binary Search
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        left=0
+        right=len(nums)-1
+        
+        while(left<=right):
+            middle=int((left+(right-left)/2))
+            if (nums[middle]>target):
+                right=middle-1
+            elif (nums[middle]<target):
+                left=middle+1
+            else:
+                return middle
+        return -1
+ 27. Remove Element
+ class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        k=len(nums)
+        for i in range(len(nums)):
+            if nums[i]==val:
+               nums[i]=127
+               k=k-1
+        nums.sort()
+        return k
+ 35. Search Insert Position
+ class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        left=0
+        right=len(nums)-1
+        while(left<=right):
+            middle=left+(right-left)//2
+            if (nums[middle]>target):
+                right=middle-1
+            elif (nums[middle]<target):
+                left=middle+1
+            else:
+                return middle
+        if nums[middle]<target:
+            return middle+1
+        else:
+            return middle
+34. Find First and Last Position of Element in Sorted Array
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        def getRightBorder(nums:List[int], target:int) -> int:
+            left, right = 0, len(nums)-1
+            rightBoder = -2 # 记录一下rightBorder没有被赋值的情况
+            while left <= right:
+                middle = left + (right-left) // 2
+                if nums[middle] > target:
+                    right = middle - 1
+                else: # 寻找右边界，nums[middle] == target的时候更新left
+                    left = middle + 1
+                    rightBoder = left
+    
+            return rightBoder
+        def getLeftBorder(nums:List[int],target:int)->int:
+            left,right = 0,len(nums)-1
+            leftBoder = -2
+            while left<=right:
+                middle = left + (right-left)//2
+                if nums[middle]<target:
+                    left = middle+1
+                else:
+                    right = middle-1
+                    leftBoder = right
+            return leftBoder 
+        leftBoder = getLeftBorder(nums, target)
+        rightBoder = getRightBorder(nums, target)
+        # 情况一
+        if leftBoder == -2 or rightBoder == -2: return [-1, -1]
+        # 情况三
+        if rightBoder -leftBoder >1: return [leftBoder + 1, rightBoder - 1]
+        # 情况二
+        return [-1, -1]
+69. Sqrt(x)
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        left = 1
+        right = x
+        ans = 0
+        while(left<=right):
+            middle=left+(right-left)//2
+            if (middle*middle<=x):
+                left=middle+1
+                ans=middle
+            else:
+                right=middle-1
+        return ans
+367. Valid Perfect Square
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        left=1
+        right=num
+        ans=0
+        while(left<=right):
+            middle=left+(right-left)//2
+            if (middle*middle<num):
+                left=middle+1
+            elif (middle*middle>num):
+                right=middle-1
+            elif (middle*middle==num):
+                return 'true'
+            else:
+                return 'false'
+
+
+
+
+            
