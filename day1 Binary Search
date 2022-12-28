@@ -13,16 +13,6 @@ class Solution:
             else:
                 return middle
         return -1
- 27. Remove Element
- class Solution:
-    def removeElement(self, nums: List[int], val: int) -> int:
-        k=len(nums)
-        for i in range(len(nums)):
-            if nums[i]==val:
-               nums[i]=127
-               k=k-1
-        nums.sort()
-        return k
  35. Search Insert Position
  class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
