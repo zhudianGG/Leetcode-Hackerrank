@@ -1,0 +1,98 @@
+203. Remove Linked List Elements
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+        dummy_head=ListNode(next=head)
+        cur=dummy_head
+        while (cur.next!=None):
+            if (cur.next.val==val):
+                cur.next=cur.next.next
+            else:
+                cur=cur.next
+        return dummy_head.next
+707. Design Linked List
+class Node(object):
+    def __init__(self,x=0):
+        self.val=x
+        self.next=None
+class MyLinkedList:
+
+    def __init__(self):
+        self.head=Node()
+        self.size=0
+
+    def get(self, index: int) -> int:
+        if (index<0 or index>=self.size):
+            return -1
+        cur=self.head.next
+        while(index):
+            cur=cur.next
+            index-=1
+        return cur.val
+
+    def addAtHead(self, val: int) -> None:
+        new_node = Node(val)
+        new_node.next=self.head.next
+        self.head.next=new_node
+        self.size+=1
+        
+
+    def addAtTail(self, val: int) -> None:
+        new_node=Node(val)
+        cur=self.head
+        while(cur.next):
+            cur=cur.next
+        cur.next=new_node
+        self.size+=1
+        
+
+    def addAtIndex(self, index: int, val: int) -> None:
+        new_node=Node(val)
+        if (index>self.size):
+            return
+        elif index<0:
+            self.addAtHead(val)
+            return
+        elif index==self.size:
+            self.addAtTail(val)
+            return
+        else:
+            pre=self.head
+            while(index):
+                pre=pre.next
+                index-=1
+            new_node.next=pre.next
+            pre.next=new_node
+            self.size+=1
+
+    def deleteAtIndex(self, index: int) -> None:
+        if (index<0 or index>=self.size):
+            return
+        else:
+            pre=self.head
+            while(index):
+                pre=pre.next
+                index-=1
+            pre.next=pre.next.next
+            self.size-=1
+
+206. Reverse Linked List
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        cur=head
+        pre=None
+        while(cur):
+            temp=cur.next
+            cur.next=pre
+            pre=cur
+            cur=temp
+        return pre
